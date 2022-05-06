@@ -39,7 +39,7 @@ jobs:
           # Artifact name
           name: tailscale-fdroid.apk # optional, default is artifact
           # A file, directory or wildcard pattern that describes what to upload
-          path:  tailscale-fdroid.apk
+          path: /home/runner/work/tailscale-android/tailscale-android/tailscale-fdroid.apk
           # The desired behavior if no files are found using the provided path.
           if-no-files-found: error # optional, default is warn
 
