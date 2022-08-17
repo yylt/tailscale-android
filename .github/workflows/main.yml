@@ -22,11 +22,16 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+        name: checkout
+        with:
+          repository: tailscale/tailscale-android
+          ref: main
+          path: tailscale
 
       - name: build
         run: |
+          cd tailscale
           docker build -t tailscale-android .
           docker run -v ${PWD}:/build/tailscale-android --rm tailscale-android make tailscale-debug.apk
 
@@ -35,6 +40,6 @@ jobs:
         if: ${{ success() }}
         with:
           tag_name: latest
-          files: tailscale-debug.apk
+          files: tailscale/tailscale-debug.apk
           release: true
           repository: ${{ github.actor }}/tailscale-android
